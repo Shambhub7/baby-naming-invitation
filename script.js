@@ -1,93 +1,106 @@
-/* ==========================
+/* ==========================================
    BABY NAMING CEREMONY
-   script.js
-========================== */
+   Premium Script
+   Part 3A
+========================================== */
 
 // ================= Loader =================
+
 window.addEventListener("load", () => {
+
     setTimeout(() => {
+
         const loader = document.getElementById("loader");
-        if (loader) {
-            loader.style.opacity = "0";
-            loader.style.visibility = "hidden";
-        }
-    }, 1500);
+
+        loader.style.opacity = "0";
+        loader.style.visibility = "hidden";
+
+    }, 1800);
+
 });
 
 // ================= Open Invitation =================
-const openInvitationBtn = document.getElementById("openInvitation");
 
-if (openInvitationBtn) {
-    openInvitationBtn.addEventListener("click", () => {
+const openBtn = document.getElementById("openInvitation");
+
+if (openBtn) {
+
+    openBtn.addEventListener("click", () => {
 
         document.getElementById("invitation").scrollIntoView({
+
             behavior: "smooth"
+
         });
 
         launchConfetti();
+
     });
+
 }
 
 // ================= Dark Mode =================
+
 const themeBtn = document.getElementById("themeBtn");
 
-if (themeBtn) {
+themeBtn.addEventListener("click", () => {
 
-    themeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
 
-        document.body.classList.toggle("dark");
+    if (document.body.classList.contains("dark")) {
 
-        themeBtn.innerHTML =
-            document.body.classList.contains("dark") ? "☀️" : "🌙";
+        themeBtn.innerHTML = "☀️";
 
-    });
+    } else {
 
-}
+        themeBtn.innerHTML = "🌙";
+
+    }
+
+});
 
 // ================= Countdown =================
 
 const targetDate = new Date("July 5, 2026 11:00:00").getTime();
 
-setInterval(() => {
+function updateCountdown() {
 
     const now = new Date().getTime();
+
     const distance = targetDate - now;
 
-    if (distance <= 0) {
+    if (distance < 0) {
 
-        document.getElementById("days").textContent = "00";
-        document.getElementById("hours").textContent = "00";
-        document.getElementById("minutes").textContent = "00";
-        document.getElementById("seconds").textContent = "00";
+        document.getElementById("days").innerHTML = "00";
+        document.getElementById("hours").innerHTML = "00";
+        document.getElementById("minutes").innerHTML = "00";
+        document.getElementById("seconds").innerHTML = "00";
 
         return;
+
     }
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = hours;
-    document.getElementById("minutes").textContent = minutes;
-    document.getElementById("seconds").textContent = seconds;
+    document.getElementById("days").textContent = String(days).padStart(2, "0");
 
-}, 1000);
+    document.getElementById("hours").textContent = String(hours).padStart(2, "0");
 
-// ================= Invitation Card Zoom =================
+    document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
 
-const card = document.querySelector(".card img");
-
-if (card) {
-
-    card.addEventListener("click", () => {
-
-        card.classList.toggle("zoom");
-
-    });
+    document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
 
 }
+
+updateCountdown();
+
+setInterval(updateCountdown, 1000);
 
 // ================= Scroll Animation =================
 
@@ -102,6 +115,10 @@ const observer = new IntersectionObserver((entries) => {
         }
 
     });
+
+}, {
+
+    threshold: 0.15
 
 });
 
@@ -118,13 +135,16 @@ function createFlower() {
     const flower = document.createElement("div");
 
     flower.className = "flower";
-    flower.innerHTML = "🌸";
+
+    flower.innerHTML = ["🌸", "🌺", "🌼"][Math.floor(Math.random() * 3)];
 
     flower.style.left = Math.random() * 100 + "vw";
-    flower.style.fontSize = (20 + Math.random() * 20) + "px";
-    flower.style.animationDuration = (5 + Math.random() * 5) + "s";
 
-    document.body.appendChild(flower);
+    flower.style.fontSize = (18 + Math.random() * 18) + "px";
+
+    flower.style.animationDuration = (6 + Math.random() * 4) + "s";
+
+    document.getElementById("flowers").appendChild(flower);
 
     setTimeout(() => {
 
@@ -135,46 +155,51 @@ function createFlower() {
 }
 
 setInterval(createFlower, 500);
+/* ==========================================
+   PART 3B
+========================================== */
 
 // ================= Background Music =================
 
-let music = new Audio("assets/music.mp3");
+let music;
 
-music.loop = true;
+function loadMusic() {
+
+    music = new Audio("assets/music.mp3");
+
+    music.loop = true;
+
+}
+
+loadMusic();
 
 const musicBtn = document.getElementById("musicBtn");
 
-function toggleMusic() {
+musicBtn.addEventListener("click", () => {
 
     if (music.paused) {
 
         music.play();
 
-        if (musicBtn)
-            musicBtn.innerHTML = "⏸️";
+        musicBtn.innerHTML = "🔊";
 
     } else {
 
         music.pause();
 
-        if (musicBtn)
-            musicBtn.innerHTML = "🎵";
+        musicBtn.innerHTML = "🎵";
 
     }
 
-}
+});
 
-if (musicBtn) {
-
-    musicBtn.addEventListener("click", toggleMusic);
-
-}
+// Press M Key
 
 document.addEventListener("keydown", (e) => {
 
     if (e.key.toLowerCase() === "m") {
 
-        toggleMusic();
+        musicBtn.click();
 
     }
 
@@ -185,12 +210,14 @@ document.addEventListener("keydown", (e) => {
 function shareInvitation() {
 
     const text =
-        "You're invited to our Baby Naming Ceremony ❤️\n\n" +
+        "👶 You are invited to our Baby Naming Ceremony!\n\n" +
         window.location.href;
 
     window.open(
 
-        "https://wa.me/?text=" + encodeURIComponent(text),
+        "https://wa.me/?text=" +
+
+        encodeURIComponent(text),
 
         "_blank"
 
@@ -202,13 +229,12 @@ function shareInvitation() {
 
 function addCalendar() {
 
-    window.open(
+    const url =
+        "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+        "&text=Baby+Naming+Ceremony" +
+        "&dates=20260705T110000/20260705T140000";
 
-        "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby+Naming+Ceremony&dates=20260705T110000/20260705T140000",
-
-        "_blank"
-
-    );
+    window.open(url, "_blank");
 
 }
 
@@ -218,23 +244,23 @@ function launchConfetti() {
 
     for (let i = 0; i < 150; i++) {
 
-        const c = document.createElement("div");
+        const confetti = document.createElement("div");
 
-        c.className = "confetti";
+        confetti.className = "confetti";
 
-        c.style.left = Math.random() * 100 + "vw";
+        confetti.style.left = Math.random() * 100 + "vw";
 
-        c.style.background =
+        confetti.style.background =
             `hsl(${Math.random() * 360},100%,50%)`;
 
-        c.style.animationDuration =
+        confetti.style.animationDuration =
             (2 + Math.random() * 3) + "s";
 
-        document.body.appendChild(c);
+        document.body.appendChild(confetti);
 
         setTimeout(() => {
 
-            c.remove();
+            confetti.remove();
 
         }, 5000);
 
@@ -242,77 +268,55 @@ function launchConfetti() {
 
 }
 
-// ================= RSVP =================
-
-const rsvpForm = document.getElementById("rsvpForm");
-
-if (rsvpForm) {
-
-    rsvpForm.addEventListener("submit", (e) => {
-
-        e.preventDefault();
-
-        alert("🎉 Thank you! Your RSVP has been received.");
-
-        rsvpForm.reset();
-
-    });
-
-}
-
-// ================= Scroll To Top =================
+// ================= Scroll Top =================
 
 const scrollBtn = document.getElementById("scrollTop");
 
 window.addEventListener("scroll", () => {
 
-    if (!scrollBtn) return;
+    if (window.scrollY > 300) {
 
-    scrollBtn.style.display =
-        window.scrollY > 300 ? "block" : "none";
+        scrollBtn.style.display = "block";
+
+    } else {
+
+        scrollBtn.style.display = "none";
+
+    }
 
 });
 
-if (scrollBtn) {
+scrollBtn.addEventListener("click", () => {
 
-    scrollBtn.addEventListener("click", () => {
+    window.scrollTo({
 
-        window.scrollTo({
+        top: 0,
 
-            top: 0,
-
-            behavior: "smooth"
-
-        });
+        behavior: "smooth"
 
     });
 
-}
+});
 
-// ================= Visitor Counter =================
+// ================= RSVP =================
 
-let visits = Number(localStorage.getItem("visits")) || 0;
+const form = document.getElementById("rsvpForm");
 
-visits++;
+form.addEventListener("submit", (e) => {
 
-localStorage.setItem("visits", visits);
+    e.preventDefault();
 
-console.log("Visits:", visits);
+    const name = form.querySelector("input").value;
 
-// ================= Greeting =================
+    alert(
+        "Thank you " +
+        name +
+        "! ❤️\n\nYour RSVP has been received."
+    );
 
-const hour = new Date().getHours();
+    form.reset();
 
-let greeting = "Welcome";
-
-if (hour < 12)
-    greeting = "Good Morning";
-else if (hour < 18)
-    greeting = "Good Afternoon";
-else
-    greeting = "Good Evening";
-
-console.log(greeting);
+});
 
 // ================= Button Hover =================
 
@@ -332,6 +336,46 @@ document.querySelectorAll("button").forEach(btn => {
 
 });
 
+// ================= Greeting =================
+
+const hour = new Date().getHours();
+
+let greeting = "Welcome";
+
+if (hour < 12) {
+
+    greeting = "Good Morning ☀️";
+
+} else if (hour < 18) {
+
+    greeting = "Good Afternoon 🌸";
+
+} else {
+
+    greeting = "Good Evening 🌙";
+
+}
+
+console.log(greeting);
+
+// ================= Visitor Counter =================
+
+let visits = localStorage.getItem("babyVisits");
+
+if (!visits) {
+
+    visits = 1;
+
+} else {
+
+    visits++;
+
+}
+
+localStorage.setItem("babyVisits", visits);
+
+console.log("Visits:", visits);
+
 // ================= Service Worker =================
 
 if ("serviceWorker" in navigator) {
@@ -339,10 +383,19 @@ if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
 
         navigator.serviceWorker
+
             .register("./sw.js")
-            .then(() => console.log("✅ Service Worker Registered"))
+
+            .then(() => {
+
+                console.log("Service Worker Registered");
+
+            })
+
             .catch(err => console.log(err));
 
     });
 
 }
+
+console.log("Baby Naming Ceremony Loaded Successfully ❤️");
