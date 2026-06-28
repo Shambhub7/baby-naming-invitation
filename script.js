@@ -164,20 +164,20 @@ setInterval(createFlower, 500);
 const musicBtn = document.getElementById("musicBtn");
 const bgMusic = document.getElementById("bgMusic");
 
-// Start music on first user interaction
-document.addEventListener("click", function startMusic() {
+// Try autoplay when page loads
+window.addEventListener("load", () => {
 
-    bgMusic.play().then(() => {
-        musicBtn.innerHTML = "🔊";
-    }).catch(err => {
-        console.log("Music blocked:", err);
-    });
+    bgMusic.play()
+        .then(() => {
+            musicBtn.innerHTML = "🔊";
+        })
+        .catch(err => {
+            console.log("Autoplay blocked by browser:", err);
+        });
 
-    document.removeEventListener("click", startMusic);
+});
 
-}, { once: true });
-
-// Music button toggle
+// Toggle music manually
 musicBtn.addEventListener("click", () => {
 
     if (bgMusic.paused) {
