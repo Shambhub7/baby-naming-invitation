@@ -164,35 +164,31 @@ setInterval(createFlower, 500);
 let music;
 
 function loadMusic() {
-
     music = new Audio("assets/music.mpeg");
-
     music.loop = true;
-
 }
 
 loadMusic();
 
-const bgMusic = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
 
-bgMusic.addEventListener("click", () => {
+musicBtn.addEventListener("click", () => {
 
     if (music.paused) {
 
         music.play();
 
-       bgMusic.innerHTML = "🔊";
+        musicBtn.innerHTML = "🔊";
 
     } else {
 
         music.pause();
 
-        bgMusic.innerHTML = "🎵";
+        musicBtn.innerHTML = "🎵";
 
     }
 
 });
-
 // Press M Key
 
 document.addEventListener("keydown", (e) => {
