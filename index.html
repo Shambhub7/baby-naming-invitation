@@ -2,45 +2,71 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Baby Naming Ceremony | ನಾಮಕರಣ</title>
 
-<title>Baby Naming Ceremony</title>
+    <meta name="description"
+        content="You are cordially invited to our Baby Naming & Cradle Ceremony">
 
-<meta name="description"
-content="Baby Naming Ceremony Invitation">
+    <meta name="keywords"
+        content="Baby Naming Ceremony, Invitation, Cradle Ceremony, Namakarana">
 
-<link rel="stylesheet" href="style.css">
+    <meta name="author" content="Family">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="theme-color" content="#800020">
 
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
+    <meta property="og:title" content="Baby Naming Ceremony">
+    <meta property="og:description"
+        content="Join us to celebrate our baby's naming ceremony.">
+    <meta property="og:image" content="assets/invitation.jpg">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+Kannada:wght@300;500;700&display=swap"
-rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
 
-<script defer src="script.js"></script>
+    <link rel="icon" href="assets/icons/favicon.ico">
+
+    <link rel="apple-touch-icon"
+        href="assets/icons/icon-192.png">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Kannada:wght@400;500;700&display=swap"
+        rel="stylesheet">
 
 </head>
 
 <body>
 
+<!-- ================= Loader ================= -->
+
 <div id="loader">
 
-<div class="loader-content">
+    <div class="loader-content">
 
-<h1>👶</h1>
+        <h1>👶</h1>
 
-<h2>Baby Naming Ceremony</h2>
+        <h2>Baby Naming Ceremony</h2>
 
-<p>Loading Invitation...</p>
+        <p>Loading Invitation...</p>
+
+    </div>
 
 </div>
 
-</div>
+<!-- =============== Flower Animation ============== -->
+
+<div id="flowers"></div>
+
+<!-- =============== Navigation ==================== -->
 
 <header>
 
@@ -56,7 +82,7 @@ rel="stylesheet">
 
 <li><a href="#home">Home</a></li>
 
-<li><a href="#invite">Invitation</a></li>
+<li><a href="#invitation">Invitation</a></li>
 
 <li><a href="#countdown">Countdown</a></li>
 
@@ -70,25 +96,35 @@ rel="stylesheet">
 
 </ul>
 
+<div class="nav-buttons">
+
 <button id="themeBtn">
 
 🌙
 
 </button>
 
+<button id="musicBtn">
+
+🎵
+
+</button>
+
+</div>
+
 </nav>
 
 </header>
 
-<section
-id="home"
-class="hero">
+<!-- ================= Hero ================= -->
+
+<section id="home" class="hero">
 
 <div class="overlay">
 
 <h3>
 
-Welcome
+Welcome ❤️
 
 ಸ್ವಾಗತ
 
@@ -110,9 +146,19 @@ Baby Naming Ceremony
 
 A little miracle,
 
-A lifetime of happiness ❤️
+A lifetime of happiness.
 
 </p>
+
+<p>
+
+ಒಂದು ಪುಟ್ಟ ನಗು...
+
+ಸಾವಿರ ಸಂತೋಷಗಳು ❤️
+
+</p>
+
+<div class="hero-buttons">
 
 <button id="openInvitation">
 
@@ -120,12 +166,21 @@ Open Invitation
 
 </button>
 
+<button onclick="shareInvitation()">
+
+Share
+
+</button>
+
+</div>
+
 </div>
 
 </section>
 
-<section
-id="invite">
+<!-- ================= Invitation ================= -->
+
+<section id="invitation">
 
 <h2>
 
@@ -143,79 +198,359 @@ alt="Invitation">
 
 </div>
 
+<p class="invite-text">
+
+With the blessings of Almighty,
+
+we cordially invite you and your family
+
+to the Baby Naming Ceremony.
+
+<br><br>
+
+ದೇವರ ಕೃಪೆಯಿಂದ ನಡೆಯಲಿರುವ
+
+ನಮ್ಮ ಮಗುವಿನ ನಾಮಕರಣ ಹಾಗೂ
+
+ತೊಟ್ಟಿಲು ಶಾಸ್ತ್ರಕ್ಕೆ
+
+ತಮ್ಮ ಕುಟುಂಬ ಸಮೇತರಾಗಿ ಆಗಮಿಸಿ
+
+ಆಶೀರ್ವದಿಸಬೇಕಾಗಿ ವಿನಂತಿ.
+
+</p>
+
+</section>
+<!-- ================= Countdown ================= -->
+
+<section id="countdown">
+
+    <div class="container">
+
+        <h2>Countdown</h2>
+
+        <h3>ಕಾರ್ಯಕ್ರಮಕ್ಕೆ ಉಳಿದಿರುವ ಸಮಯ</h3>
+
+        <div class="timer">
+
+            <div class="time-box">
+                <span id="days">00</span>
+                <p>Days</p>
+            </div>
+
+            <div class="time-box">
+                <span id="hours">00</span>
+                <p>Hours</p>
+            </div>
+
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <p>Minutes</p>
+            </div>
+
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <p>Seconds</p>
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
-<section
-id="countdown">
+<!-- ================= Event Details ================= -->
+
+<section id="details">
+
+    <h2>Event Details</h2>
+
+    <div class="details-grid">
+
+        <div class="detail-card">
+
+            <h3>👶 Ceremony</h3>
+
+            <p>Baby Naming & Cradle Ceremony</p>
+
+            <p>ನಾಮಕರಣ ಹಾಗೂ ತೊಟ್ಟಿಲು ಶಾಸ್ತ್ರ</p>
+
+        </div>
+
+        <div class="detail-card">
+
+            <h3>📅 Date</h3>
+
+            <p>Sunday</p>
+
+            <p>5 July 2026</p>
+
+        </div>
+
+        <div class="detail-card">
+
+            <h3>⏰ Time</h3>
+
+            <p>11:00 AM onwards</p>
+
+        </div>
+
+        <div class="detail-card">
+
+            <h3>📍 Place</h3>
+
+            <p>Vijapura</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= Venue ================= -->
+
+<section id="venue">
+
+    <h2>Venue</h2>
+
+    <p>We look forward to welcoming you.</p>
+
+    <p>ಸ್ಥಳಕ್ಕೆ ಬರಲು ಕೆಳಗಿನ ಬಟನ್ ಒತ್ತಿರಿ.</p>
+
+    <div class="map-buttons">
+
+        <a class="btn"
+           target="_blank"
+           href="https://maps.app.goo.gl/9ALyMFiazDqwXdQS6">
+
+            📍 Open Google Maps
+
+        </a>
+
+        <button onclick="addCalendar()">
+
+            📅 Add To Calendar
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ================= Gallery ================= -->
+
+<section id="gallery">
+
+    <h2>Gallery</h2>
+
+    <p>
+
+        Beautiful memories will be added here after the ceremony ❤️
+
+    </p>
+
+    <div class="gallery-grid">
+
+        <img src="assets/gallery/1.jpg" alt="Gallery">
+
+        <img src="assets/gallery/2.jpg" alt="Gallery">
+
+        <img src="assets/gallery/3.jpg" alt="Gallery">
+
+        <img src="assets/gallery/4.jpg" alt="Gallery">
+
+    </div>
+
+</section>
+
+<!-- ================= Blessings ================= -->
+
+<section id="blessings">
+
+    <h2>Your Presence is Our Blessing ❤️</h2>
+
+    <p>
+
+        Your love, blessings and presence
+
+        will make this celebration
+
+        even more memorable.
+
+    </p>
+
+    <p>
+
+        ನಿಮ್ಮ ಆಶೀರ್ವಾದವೇ
+
+        ನಮ್ಮ ಮಗುವಿಗೆ ಅಮೂಲ್ಯ ಉಡುಗೊರೆ.
+
+    </p>
+
+</section>
+<!-- ================= RSVP ================= -->
+
+<section id="rsvp">
+
+    <h2>RSVP</h2>
+
+    <p>Please let us know if you will be joining us.</p>
+
+    <p>ದಯವಿಟ್ಟು ನಿಮ್ಮ ಆಗಮನವನ್ನು ತಿಳಿಸಿ.</p>
+
+    <form id="rsvpForm">
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Your Name"
+            required>
+
+        <input
+            type="number"
+            id="guests"
+            placeholder="Number of Guests"
+            required>
+
+        <select id="food">
+
+            <option>Veg</option>
+
+            <option>Non Veg</option>
+
+        </select>
+
+        <textarea
+            id="message"
+            placeholder="Blessings / Message"></textarea>
+
+        <button type="submit">
+
+            Submit RSVP
+
+        </button>
+
+    </form>
+
+</section>
+
+<!-- ================= Contact ================= -->
+
+<section id="contact">
+
+    <h2>Contact</h2>
+
+    <div class="contact-grid">
+
+        <div class="contact-card">
+
+            <h3>📞 Phone</h3>
+
+            <a href="tel:+917026XXXXXX">
+
+                7026XXXXXX
+
+            </a>
+
+        </div>
+
+        <div class="contact-card">
+
+            <h3>📍 Venue</h3>
+
+            <a
+                target="_blank"
+                href="https://maps.app.goo.gl/9ALyMFiazDqwXdQS6">
+
+                Open Google Maps
+
+            </a>
+
+        </div>
+
+        <div class="contact-card">
+
+            <h3>📤 Share</h3>
+
+            <button onclick="shareInvitation()">
+
+                Share Invitation
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Floating WhatsApp -->
+
+<a
+class="whatsapp"
+href="https://wa.me/917026XXXXXX"
+target="_blank">
+
+💬
+
+</a>
+
+<!-- Scroll To Top -->
+
+<button id="scrollTop">
+
+⬆
+
+</button>
+
+<!-- ================= Footer ================= -->
+
+<footer>
 
 <h2>
 
-Countdown
-
-</h2>
-
-<div class="timer">
-
-<div>
-
-<span id="days">0</span>
-
-<p>Days</p>
-
-</div>
-
-<div>
-
-<span id="hours">0</span>
-
-<p>Hours</p>
-
-</div>
-
-<div>
-
-<span id="minutes">0</span>
-
-<p>Minutes</p>
-
-</div>
-
-<div>
-
-<span id="seconds">0</span>
-
-<p>Seconds</p>
-
-</div>
-
-</div>
-
-</section>
-
-<section
-id="venue">
-
-<h2>
-
-Venue
-
-ಸ್ಥಳ
+🙏 Thank You 🙏
 
 </h2>
 
 <p>
 
-Vijapura
+We look forward to celebrating
+
+this beautiful occasion
+
+with you and your family.
 
 </p>
 
-<a
-class="btn"
-href="https://maps.app.goo.gl/9ALyMFiazDqwXdQS6"
-target="_blank">
+<p>
 
-Open Google Maps
+ತಮ್ಮ ಆಗಮನಕ್ಕಾಗಿ
 
-</a>
+ಆತುರದಿಂದ ಕಾಯುತ್ತಿದ್ದೇವೆ.
 
-</section>
+</p>
+
+<hr>
+
+<p>
+
+Made with ❤️
+
+for our little Baby
+
+</p>
+
+<p>
+
+© 2026 Baby Naming Ceremony
+
+</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
