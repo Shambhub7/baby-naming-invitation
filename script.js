@@ -165,7 +165,7 @@ let music;
 
 function loadMusic() {
 
-    music = new Audio("assets/music.mp3");
+    music = new Audio("assets/music.mpeg");
 
     music.loop = true;
 
@@ -173,21 +173,21 @@ function loadMusic() {
 
 loadMusic();
 
-const musicBtn = document.getElementById("musicBtn");
+const bgMusic = document.getElementById("bgMusic");
 
-musicBtn.addEventListener("click", () => {
+bgMusic.addEventListener("click", () => {
 
     if (music.paused) {
 
         music.play();
 
-        musicBtn.innerHTML = "🔊";
+       bgMusic.innerHTML = "🔊";
 
     } else {
 
         music.pause();
 
-        musicBtn.innerHTML = "🎵";
+        bgMusic.innerHTML = "🎵";
 
     }
 
@@ -199,7 +199,7 @@ document.addEventListener("keydown", (e) => {
 
     if (e.key.toLowerCase() === "m") {
 
-        musicBtn.click();
+        bgMusic.click();
 
     }
 
