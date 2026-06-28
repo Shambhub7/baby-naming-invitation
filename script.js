@@ -3,300 +3,346 @@
    script.js
 ========================== */
 
-// Hide Loader
+// ================= Loader =================
 window.addEventListener("load", () => {
     setTimeout(() => {
-        document.getElementById("loader").style.opacity = "0";
-        document.getElementById("loader").style.visibility = "hidden";
+        const loader = document.getElementById("loader");
+        if (loader) {
+            loader.style.opacity = "0";
+            loader.style.visibility = "hidden";
+        }
     }, 1500);
 });
 
-// Open Invitation Button
-document.getElementById("openInvitation").addEventListener("click", () => {
+// ================= Open Invitation =================
+const openInvitationBtn = document.getElementById("openInvitation");
 
-    document.getElementById("invite").scrollIntoView({
-        behavior: "smooth"
+if (openInvitationBtn) {
+    openInvitationBtn.addEventListener("click", () => {
+
+        document.getElementById("invitation").scrollIntoView({
+            behavior: "smooth"
+        });
+
+        launchConfetti();
     });
+}
 
-    launchConfetti();
-
-});
-
-// Dark Mode
+// ================= Dark Mode =================
 const themeBtn = document.getElementById("themeBtn");
 
-themeBtn.addEventListener("click", () => {
+if (themeBtn) {
 
-    document.body.classList.toggle("dark");
+    themeBtn.addEventListener("click", () => {
 
-    if(document.body.classList.contains("dark")){
-        themeBtn.innerHTML="☀️";
-    }else{
-        themeBtn.innerHTML="🌙";
-    }
+        document.body.classList.toggle("dark");
 
-});
+        themeBtn.innerHTML =
+            document.body.classList.contains("dark") ? "☀️" : "🌙";
 
-// Countdown
+    });
+
+}
+
+// ================= Countdown =================
 
 const targetDate = new Date("July 5, 2026 11:00:00").getTime();
 
 setInterval(() => {
 
     const now = new Date().getTime();
-
     const distance = targetDate - now;
 
+    if (distance <= 0) {
+
+        document.getElementById("days").textContent = "00";
+        document.getElementById("hours").textContent = "00";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
+
+        return;
+    }
+
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    const hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
 
-    const minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+}, 1000);
 
-    const seconds = Math.floor((distance % (1000*60))/1000);
+// ================= Invitation Card Zoom =================
 
-    document.getElementById("days").innerHTML = days;
-    document.getElementById("hours").innerHTML = hours;
-    document.getElementById("minutes").innerHTML = minutes;
-    document.getElementById("seconds").innerHTML = seconds;
+const card = document.querySelector(".card img");
 
-},1000);
+if (card) {
 
-// Card Zoom
+    card.addEventListener("click", () => {
 
-const card=document.querySelector(".card img");
+        card.classList.toggle("zoom");
 
-card.addEventListener("click",()=>{
-
-if(card.classList.contains("zoom")){
-
-card.classList.remove("zoom");
-
-}else{
-
-card.classList.add("zoom");
+    });
 
 }
+
+// ================= Scroll Animation =================
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
 
 });
 
-// Scroll Animation
+document.querySelectorAll("section").forEach(section => {
 
-const observer=new IntersectionObserver((entries)=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-entry.target.classList.add("show");
-
-}
+    observer.observe(section);
 
 });
 
-});
+// ================= Floating Flowers =================
 
-document.querySelectorAll("section").forEach(sec=>{
+function createFlower() {
 
-observer.observe(sec);
+    const flower = document.createElement("div");
 
-});
+    flower.className = "flower";
+    flower.innerHTML = "🌸";
 
-// Floating Flowers
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.fontSize = (20 + Math.random() * 20) + "px";
+    flower.style.animationDuration = (5 + Math.random() * 5) + "s";
 
-function createFlower(){
+    document.body.appendChild(flower);
 
-const flower=document.createElement("div");
+    setTimeout(() => {
 
-flower.innerHTML="🌸";
+        flower.remove();
 
-flower.className="flower";
-
-flower.style.left=Math.random()*100+"vw";
-
-flower.style.animationDuration=5+Math.random()*5+"s";
-
-flower.style.fontSize=20+Math.random()*20+"px";
-
-document.body.appendChild(flower);
-
-setTimeout(()=>{
-
-flower.remove();
-
-},10000);
+    }, 10000);
 
 }
 
-setInterval(createFlower,500);
+setInterval(createFlower, 500);
 
-// Background Music
+// ================= Background Music =================
 
-let music;
+let music = new Audio("assets/music.mp3");
 
-function loadMusic(){
+music.loop = true;
 
-music=new Audio("assets/music.mp3");
+const musicBtn = document.getElementById("musicBtn");
 
-music.loop=true;
+function toggleMusic() {
+
+    if (music.paused) {
+
+        music.play();
+
+        if (musicBtn)
+            musicBtn.innerHTML = "⏸️";
+
+    } else {
+
+        music.pause();
+
+        if (musicBtn)
+            musicBtn.innerHTML = "🎵";
+
+    }
+
+}
+
+if (musicBtn) {
+
+    musicBtn.addEventListener("click", toggleMusic);
 
 }
 
-loadMusic();
+document.addEventListener("keydown", (e) => {
 
-function toggleMusic(){
+    if (e.key.toLowerCase() === "m") {
 
-if(music.paused){
+        toggleMusic();
 
-music.play();
-
-}else{
-
-music.pause();
-
-}
-
-}
-
-// Press M to play music
-
-document.addEventListener("keydown",(e)=>{
-
-if(e.key==="m"){
-
-toggleMusic();
-
-}
+    }
 
 });
 
-// WhatsApp Share
+// ================= WhatsApp Share =================
 
-function shareInvitation(){
+function shareInvitation() {
 
-const url=window.location.href;
+    const text =
+        "You're invited to our Baby Naming Ceremony ❤️\n\n" +
+        window.location.href;
 
-const text="You're invited to our Baby Naming Ceremony ❤️ "+url;
+    window.open(
 
-window.open(
+        "https://wa.me/?text=" + encodeURIComponent(text),
 
-"https://wa.me/?text="+encodeURIComponent(text),
+        "_blank"
 
-"_blank"
-
-);
-
-}
-
-// Calendar
-
-function addCalendar(){
-
-window.open(
-
-"https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby+Naming+Ceremony&dates=20260705T110000/20260705T140000",
-
-"_blank"
-
-);
+    );
 
 }
 
-// Confetti
+// ================= Google Calendar =================
 
-function launchConfetti(){
+function addCalendar() {
 
-for(let i=0;i<150;i++){
+    window.open(
 
-const c=document.createElement("div");
+        "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby+Naming+Ceremony&dates=20260705T110000/20260705T140000",
 
-c.className="confetti";
+        "_blank"
 
-c.style.left=Math.random()*100+"vw";
-
-c.style.background=
-
-`hsl(${Math.random()*360},100%,50%)`;
-
-c.style.animationDuration=
-
-2+Math.random()*3+"s";
-
-document.body.appendChild(c);
-
-setTimeout(()=>{
-
-c.remove();
-
-},5000);
+    );
 
 }
 
-}
+// ================= Confetti =================
 
-// Visitor Counter
+function launchConfetti() {
 
-let count=localStorage.getItem("visits");
+    for (let i = 0; i < 150; i++) {
 
-if(!count){
+        const c = document.createElement("div");
 
-count=1;
+        c.className = "confetti";
 
-}else{
+        c.style.left = Math.random() * 100 + "vw";
 
-count++;
+        c.style.background =
+            `hsl(${Math.random() * 360},100%,50%)`;
 
-}
+        c.style.animationDuration =
+            (2 + Math.random() * 3) + "s";
 
-localStorage.setItem("visits",count);
+        document.body.appendChild(c);
 
-console.log("Visits:",count);
+        setTimeout(() => {
 
-// Greeting
+            c.remove();
 
-const hour=new Date().getHours();
+        }, 5000);
 
-let greet="Welcome";
-
-if(hour<12){
-
-greet="Good Morning";
-
-}else if(hour<18){
-
-greet="Good Afternoon";
-
-}else{
-
-greet="Good Evening";
+    }
 
 }
 
-console.log(greet);
+// ================= RSVP =================
 
-// Smooth Fade
+const rsvpForm = document.getElementById("rsvpForm");
 
-document.querySelectorAll("button").forEach(btn=>{
+if (rsvpForm) {
 
-btn.addEventListener("mouseenter",()=>{
+    rsvpForm.addEventListener("submit", (e) => {
 
-btn.style.transform="scale(1.05)";
+        e.preventDefault();
+
+        alert("🎉 Thank you! Your RSVP has been received.");
+
+        rsvpForm.reset();
+
+    });
+
+}
+
+// ================= Scroll To Top =================
+
+const scrollBtn = document.getElementById("scrollTop");
+
+window.addEventListener("scroll", () => {
+
+    if (!scrollBtn) return;
+
+    scrollBtn.style.display =
+        window.scrollY > 300 ? "block" : "none";
 
 });
 
-btn.addEventListener("mouseleave",()=>{
+if (scrollBtn) {
 
-btn.style.transform="scale(1)";
+    scrollBtn.addEventListener("click", () => {
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    });
+
+}
+
+// ================= Visitor Counter =================
+
+let visits = Number(localStorage.getItem("visits")) || 0;
+
+visits++;
+
+localStorage.setItem("visits", visits);
+
+console.log("Visits:", visits);
+
+// ================= Greeting =================
+
+const hour = new Date().getHours();
+
+let greeting = "Welcome";
+
+if (hour < 12)
+    greeting = "Good Morning";
+else if (hour < 18)
+    greeting = "Good Afternoon";
+else
+    greeting = "Good Evening";
+
+console.log(greeting);
+
+// ================= Button Hover =================
+
+document.querySelectorAll("button").forEach(btn => {
+
+    btn.addEventListener("mouseenter", () => {
+
+        btn.style.transform = "scale(1.05)";
+
+    });
+
+    btn.addEventListener("mouseleave", () => {
+
+        btn.style.transform = "scale(1)";
+
+    });
 
 });
 
-});
-// Register Service Worker
+// ================= Service Worker =================
+
 if ("serviceWorker" in navigator) {
+
     window.addEventListener("load", () => {
+
         navigator.serviceWorker
             .register("./sw.js")
-            .then(() => console.log("Service Worker Registered"))
+            .then(() => console.log("✅ Service Worker Registered"))
             .catch(err => console.log(err));
+
     });
+
 }
