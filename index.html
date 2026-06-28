@@ -100,9 +100,18 @@
 <button id="musicBtn">🎵</button>
 
 <audio id="bgMusic" autoplay loop>
-    <source src="assets/music.mpeg" type="audio/mpeg">
+    <source src="assets/music.mp3" type="audio/mpeg">
 </audio>
 
+<script>
+window.addEventListener("load", () => {
+    const music = document.getElementById("bgMusic");
+
+    music.play().catch(err => {
+        console.log("Browser blocked autoplay:", err);
+    });
+});
+</script>
 </button>
 
 </div>
