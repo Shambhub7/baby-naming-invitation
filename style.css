@@ -566,28 +566,30 @@ transform:translateY(110vh) rotate(360deg);
    INVITATION SECTION
 ========================================== */
 
+#invitation{
+    padding:70px 15px;
+}
+
 .invitation-card{
 
     width:100%;
     max-width:450px;
+
     margin:0 auto;
 
-    padding:20px;
+    padding:15px;
 
-    background:rgba(255,255,255,.90);
-    backdrop-filter:blur(18px);
+    background:#fff;
 
     border-radius:25px;
 
-    box-shadow:var(--shadow);
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+    overflow:visible !important;
 
     text-align:center;
 
-    border:2px solid rgba(212,175,55,.25);
-
     position:relative;
-
-    overflow:visible;
 
 }
 
@@ -601,82 +603,72 @@ transform:translateY(110vh) rotate(360deg);
     left:0;
 
     width:100%;
-    height:6px;
+    height:5px;
 
     background:linear-gradient(
         90deg,
-        var(--primary),
-        var(--secondary),
-        var(--primary)
+        #b8860b,
+        #800020,
+        #b8860b
     );
 
 }
-
-/* Invitation Image */
 
 .invitation-card img{
 
     display:block;
 
-    width:100%;
+    width:100% !important;
 
-    max-width:390px;
+    max-width:420px;
 
-    height:auto;
+    height:auto !important;
 
-    margin:0 auto 25px;
+    object-fit:contain !important;
+
+    margin:0 auto 20px;
 
     border-radius:18px;
-
-    object-fit:contain;
 
 }
 
 .baby-emoji{
 
-    font-size:60px;
-
-    margin-bottom:20px;
-
-    animation:bounce 3s infinite;
-
-}
-
-.invitation-card h2{
-
-    font-size:34px;
-
-    color:var(--primary);
+    font-size:55px;
 
     margin-bottom:15px;
 
 }
 
+.invitation-card h2{
+
+    font-size:32px;
+
+    color:#800020;
+
+    margin-bottom:10px;
+
+}
+
 .invitation-card h3{
 
-    font-family:"Noto Sans Kannada";
+    font-size:22px;
 
-    font-size:24px;
-
-    margin-bottom:25px;
-
-    color:#555;
+    margin-bottom:20px;
 
 }
 
 .invitation-card p{
 
-    font-size:17px;
+    font-size:16px;
 
     line-height:1.8;
-
-    margin-bottom:18px;
 
 }
 
 .invitation-card hr{
 
-    margin:25px auto;
+    margin:20px auto;
 
     width:70%;
 
@@ -695,9 +687,7 @@ transform:translateY(110vh) rotate(360deg);
 
 .invite-decoration{
 
-    font-size:34px;
-
-    margin-top:15px;
+    font-size:32px;
 
 }
 
@@ -709,29 +699,31 @@ transform:translateY(110vh) rotate(360deg);
 
         max-width:100%;
 
-        padding:15px;
+        padding:12px;
 
     }
 
     .invitation-card img{
 
-        width:100%;
+        width:100% !important;
 
         max-width:100%;
 
-        height:auto;
+        height:auto !important;
+
+        object-fit:contain !important;
 
     }
 
     .invitation-card h2{
 
-        font-size:28px;
+        font-size:26px;
 
     }
 
     .invitation-card h3{
 
-        font-size:20px;
+        font-size:18px;
 
     }
 
@@ -742,7 +734,6 @@ transform:translateY(110vh) rotate(360deg);
     }
 
 }
-
 /* ==========================================
    COUNTDOWN
 ========================================== */
