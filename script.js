@@ -161,29 +161,33 @@ setInterval(createFlower, 500);
 
 // ================= Background Music =================
 
-let music;
-
-function loadMusic() {
-    music = new Audio("assets/music.mpeg");
-    music.loop = true;
-}
-
-loadMusic();
-
 const musicBtn = document.getElementById("musicBtn");
+const bgMusic = document.getElementById("bgMusic");
 
+// Start music on first user interaction
+document.addEventListener("click", function startMusic() {
+
+    bgMusic.play().then(() => {
+        musicBtn.innerHTML = "🔊";
+    }).catch(err => {
+        console.log("Music blocked:", err);
+    });
+
+    document.removeEventListener("click", startMusic);
+
+}, { once: true });
+
+// Music button toggle
 musicBtn.addEventListener("click", () => {
 
-    if (music.paused) {
+    if (bgMusic.paused) {
 
-        music.play();
-
+        bgMusic.play();
         musicBtn.innerHTML = "🔊";
 
     } else {
 
-        music.pause();
-
+        bgMusic.pause();
         musicBtn.innerHTML = "🎵";
 
     }
