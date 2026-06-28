@@ -164,34 +164,23 @@ setInterval(createFlower, 500);
 const musicBtn = document.getElementById("musicBtn");
 const bgMusic = document.getElementById("bgMusic");
 
-// Try autoplay when page loads
-window.addEventListener("load", () => {
-
-    bgMusic.play()
-        .then(() => {
-            musicBtn.innerHTML = "🔊";
-        })
-        .catch(err => {
-            console.log("Autoplay blocked by browser:", err);
-        });
-
+window.addEventListener("load", async () => {
+    try {
+        await bgMusic.play();
+        musicBtn.innerHTML = "🔊";
+    } catch (e) {
+        console.log("Autoplay blocked by browser");
+    }
 });
 
-// Toggle music manually
 musicBtn.addEventListener("click", () => {
-
     if (bgMusic.paused) {
-
         bgMusic.play();
         musicBtn.innerHTML = "🔊";
-
     } else {
-
         bgMusic.pause();
         musicBtn.innerHTML = "🎵";
-
     }
-
 });
 // Press M Key
 
